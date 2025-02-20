@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @plugin "flowbite/plugin"; */
+@layer components{
+    /* General Classes */
+    .container{
+        @apply max-w-screen-xl mx-auto p-8 pr-16 pl-16
+    }
+    .custom-flex{
+        @apply flex items-center justify-center
+    }
+    .form-input,
+    .dropdown{
+        @apply p-2 text-base outline-none border-2 border-whiteAccent focus:border-blue rounded-lg
+    }
+    .btn-filled{
+        @apply bg-blue md:w-28 p-2 text-base text-white rounded-lg hover:bg-blueDark transition-all
+    }
+    .btn-outlined{
+        @apply bg-transparent md:w-28 border-2 border-blue p-2 pr-6 pl-6 text-base text-blue rounded-xl hover:bg-blue hover:text-white transition-all
+    }
+    .image{
+        @apply w-52 h-auto
+    }
+    .primary-heading{
+        @apply text-5xl font-medium mb-4 mt-4
+    }
+    .secondary-heading{
+        @apply text-4xl font-medium mb-4 mt-4
+    }
+    .tertiary-heading{
+        @apply text-2xl font-medium mb-4 mt-4
+    }
+    .input-group{
+        @apply flex flex-col gap-2
+    }
+    .box{
+        @apply bg-white p-4 rounded-lg border-whiteAccent border-2 w-full
+    }
+}
+body{
+    height: 100%;
+    width: 100%;
+}
+html{
+    height: 100%;
+    width: 100%;
+}
+/* Custom styling */
+.hero{
+    background: url("../public/assets/hero-banner.jpg") no-repeat center/cover;
+}
