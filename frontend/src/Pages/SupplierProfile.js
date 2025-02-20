@@ -1,16 +1,24 @@
 import React from "react";
 import { ProductCard, TestimonialCard } from "../imports";
+import { Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useGetSupplierQuery } from "../Services/suppliersApi";
 export const SupplierProfile = () => {
+
+  const {suppliername} = useParams()
+  let { data: supplier,} = useGetSupplierQuery(suppliername);
+  supplier = supplier?.data;
+  
   return (
     <main>
       <section className="h-full bg-whiteAccent">
         <div className="container h-full custom-flex flex-col">
           <div className="text-blue custom-flex flex-col gap-2">
             <img src="" alt="" className="w-40 h-40 rounded-full bg-black" />
-            <h1 className="secondary-heading">Mango Solutions</h1>
-            <p className="text-base">
-              Find the best laptops, accessories, and deals from trusted
-              suppliers
+            <h1 className="secondary-heading capitalize">{supplier?.businessName}</h1>
+            <p className="text-base capitalize">
+              {supplier?.tagline}
             </p>
             <button className="btn-filled">Contact Now</button>
           </div>
@@ -22,7 +30,7 @@ export const SupplierProfile = () => {
           <div className="custom-flex mx-auto justify-between w-full">
             <h1 className="tertiary-heading">Top products from supplier</h1>
             <span>
-              <a href="">See All</a>
+              <Link to={`/${supplier?.slug}/all-products`}>See All</Link>
             </span>
           </div>
           <div className="custom-flex justify-between flex-wrap gap-8 mt-6">
@@ -45,11 +53,11 @@ export const SupplierProfile = () => {
             <div className="space-y-4">
               <p className="custom-flex text-base text-black justify-start gap-2">
                 <ion-icon name="call"></ion-icon>
-                +92 300 1234567
+                {supplier?.businessPhone}
               </p>
               <p className="custom-flex text-base text-black justify-start gap-2">
                 <ion-icon name="mail"></ion-icon>
-                contact@techprosolutions.com
+                {supplier?.businessEmail}
               </p>
             </div>
 

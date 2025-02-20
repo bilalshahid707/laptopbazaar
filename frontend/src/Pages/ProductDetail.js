@@ -7,26 +7,29 @@ import {
   useGetLaptopReviewsQuery,
 } from "../Services/reviewsApi";
 import { useForm } from "react-hook-form";
+
 export const ProductDetail = () => {
-  // Fetching laptop data
+
   const { id } = useParams();
   let { data: laptop, isLoading: laptopLoading } = useGetLaptopQuery(id);
   laptop = laptop?.data;
-
-  // Fetching reviews
-  let { data: reviews } = useGetLaptopReviewsQuery(laptop?._id, {
-    skip: !laptop?._id,
-  });
+  
+  let { data: reviews } = useGetLaptopReviewsQuery(laptop?._id)
   reviews = reviews?.data || [];
-
-  // Posting review
+  
+  const [createReview, { isLoading: reviewPosting }] =
+  useCreateReviewMutation();
   const { register, handleSubmit, reset } = useForm();
-  const [createReview] = useCreateReviewMutation();
   const submitReview = async (data) => {
-    let reviewData = { ...data, laptop: laptop._id, user:laptop.supplier._id };
-    await createReview(reviewData);
+    let reviewData = { ...data, laptop: laptop._id, user: laptop.supplier._id };
+    try {
+      await createReview(reviewData).unwrap();
+    } catch (error) {
+      alert(error.data.message);
+    }
     reset();
   };
+
   return (
     <>
       {laptopLoading ? (
@@ -132,11 +135,11 @@ export const ProductDetail = () => {
                     <span className="font-bold">storage:</span> {laptop.storage}
                   </li>
                   <li>
-                    <span className="font-bold">operatingsystem:</span>{" "}
+                    <span className="font-bold">operating system:</span>{" "}
                     {laptop.operatingSystem}
                   </li>
                   <li>
-                    <span className="font-bold">usagetype:</span>{" "}
+                    <span className="font-bold">usage type:</span>{" "}
                     {laptop.usageType}
                   </li>
                 </ul>
@@ -148,7 +151,7 @@ export const ProductDetail = () => {
                   </div>
                   <p className="tertiary-heading text-blue">
                     <span className="primary-heading ">
-                      {laptop.avgRating?laptop.avgRating?.toFixed(1):'N/A'}
+                      {laptop.avgRating ? laptop.avgRating?.toFixed(1) : "N/A"}
                     </span>
                     /5.0
                   </p>
@@ -179,7 +182,7 @@ export const ProductDetail = () => {
                     </div>
                     <input
                       type="submit"
-                      value="Post"
+                      value={`${reviewPosting ? "Posting.." : "Post"}`}
                       className="btn-filled w-full"
                     />
                   </form>
@@ -197,9 +200,15 @@ export const ProductDetail = () => {
                 </span>
               </div>
               <div className="custom-flex flex-wrap gap-16 mt-6">
-                {reviews?reviews.slice(0, 3).map((review) => (
-                  <TestimonialCard key={review?.id} props={review} />
-                )):<div>No Reviews yet</div>}
+                {reviews ? (
+                  reviews
+                    .slice(0, 3)
+                    .map((review) => (
+                      <TestimonialCard key={review?.id} props={review} />
+                    ))
+                ) : (
+                  <div>No Reviews yet</div>
+                )}
               </div>
             </div>
           </section>

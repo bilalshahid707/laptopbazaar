@@ -10,10 +10,10 @@ export const AllProducts = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Fetching laptops
-  const { data, isLoading , isError} = useGetLaptopsQuery(location.search);
-  const laptops = data && data.data;
+  let { data:laptops, isLoading , isError} = useGetLaptopsQuery(location.search);
   const { data: laptopStats } = useGetStatsQuery();
+
+  laptops = laptops && laptops.data;
   let numberOfPages = Math.ceil(
     laptopStats && laptopStats.data[0].totalLaptops / 12
   );

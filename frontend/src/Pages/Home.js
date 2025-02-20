@@ -1,18 +1,22 @@
-import React from "react";
 import { ProductCard, Loader, Error } from "../imports";
 import { useGetLaptopsQuery } from "../Services/laptopsApi";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { buildQuery } from "../utils/buildQuery";
+
 export const Home = () => {
+
   const navigate = useNavigate();
+
+  let { data:laptops, isLoading, isError } = useGetLaptopsQuery();
+  laptops = laptops && laptops.data;
+
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    const query = buildQuery(data);
-    navigate(`all-products/${query}`);
+    const queryParams = new URLSearchParams(data);
+    queryParams.delete('price')
+    queryParams.append('price[lte]',data.price)
+    navigate(`all-products/?${queryParams.toString()}`);
   };
-  const { data, isLoading, isError } = useGetLaptopsQuery();
-  const laptops = data && data.data;
 
   return (
     <main className="h-full">

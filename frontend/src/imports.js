@@ -23,3 +23,6 @@ export {Error} from "./Components/utils/Error"
 
 // Routes
 export { AllRoutes } from "./Routes/AllRoutes";
+
+// Hooks
+export {useLaptops} from "./Hooks/useLaptops"
