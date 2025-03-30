@@ -5,15 +5,12 @@
 @layer components{
     /* General Classes */
     .container{
-        @apply max-w-screen-xl mx-auto p-8 pr-16 pl-16
+        @apply max-w-screen-xl mx-auto p-5 sm:pr-16 sm:pl-16
     }
     .custom-flex{
         @apply flex items-center justify-center
     }
-    .form-input,
-    .dropdown{
-        @apply p-2 text-base outline-none border-2 border-whiteAccent focus:border-blue rounded-lg
-    }
+    
     .btn-filled{
         @apply bg-blue md:w-28 p-2 text-base text-white rounded-lg hover:bg-blueDark transition-all
     }
@@ -23,8 +20,9 @@
     .image{
         @apply w-52 h-auto
     }
+
     .primary-heading{
-        @apply text-5xl font-medium mb-4 mt-4
+        @apply font-medium mb-4 mt-4
     }
     .secondary-heading{
         @apply text-4xl font-medium mb-4 mt-4
@@ -32,9 +30,18 @@
     .tertiary-heading{
         @apply text-2xl font-medium mb-4 mt-4
     }
+
     .input-group{
-        @apply flex flex-col gap-2
+        @apply flex flex-col gap-1
     }
+    .form-input,
+    .dropdown{
+        @apply p-2 text-base outline-none border-2 border-whiteAccent focus:border-blue rounded-lg
+    }
+    .input-submit{
+        @apply w-full btn-filled text-center cursor-pointer
+    }
+
     .box{
         @apply bg-white p-4 rounded-lg border-whiteAccent border-2 w-full
     }
@@ -42,12 +49,32 @@
 body{
     height: 100%;
     width: 100%;
+    overflow-x: hidden;
 }
 html{
     height: 100%;
     width: 100%;
+    overflow-x: hidden;
+}
+.primary-heading{
+    font-size: clamp(1rem,10vw,3rem);
+}
+.tertiary-heading{
+    font-size: clamp(1rem,10vw,1.5rem);
 }
 /* Custom styling */
 .hero{
     background: url("../public/assets/hero-banner.jpg") no-repeat center/cover;
+}
+
+/* Loader Animation */
+.loader{
+    animation: loader 0.5s;
+}
+@keyframes loader {
+    0%{
+        transform: translateX(-100%);
+    }100%{
+        transform: translateX(0);
+    }
 }

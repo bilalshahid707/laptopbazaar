@@ -19,7 +19,7 @@ const reviewSchema = mongoose.Schema({
   laptop: {
     type: mongoose.Schema.ObjectId,
     ref: "laptops",
-    required: [true, "review must be for a supplier"],
+    required: [true, "review must be for a laptop"],
   },
 });
 

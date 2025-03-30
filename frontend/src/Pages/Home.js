@@ -1,35 +1,32 @@
-import { ProductCard, Loader, Error } from "../imports";
-import { useGetLaptopsQuery } from "../Services/laptopsApi";
-import { Link, useNavigate } from "react-router-dom";
+import { ProductCard, Loader, useLaptops,Error } from "../imports";
+import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 export const Home = () => {
-
   const navigate = useNavigate();
-
-  let { data:laptops, isLoading, isError } = useGetLaptopsQuery();
-  laptops = laptops && laptops.data;
-
   const { register, handleSubmit } = useForm();
+
+  const { isFetching, data, error } = useLaptops({searchParams:''})
   const onSubmit = (data) => {
     const queryParams = new URLSearchParams(data);
-    queryParams.delete('price')
-    queryParams.append('price[lte]',data.price)
+    queryParams.delete("price");
+    queryParams.append("price[lte]", data.price);
     navigate(`all-products/?${queryParams.toString()}`);
   };
+  
+  const laptops = data?.data;
 
   return (
     <main className="h-full">
-      {/* Hero Section */}
       <section className="hero h-[90vh]">
         <div className="max-w-screen-xl mx-auto h-full custom-flex">
           <div className="welcome-form bg-white  shadow-xl w-[80%] p-6 rounded-lg">
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="flex gap-3 text-base items-center justify-between"
+              className="flex flex-col sm:flex-row gap-3 text-base items-center justify-between"
             >
-              <div className="input-group w-[40%] flex flex-col gap-2  ">
-                <label for="price">Price Range</label>
+              <div className="input-group w-full md:w-[40%] flex flex-col gap-2  ">
+                <label htmlFor ="price">Price Range</label>
                 <input
                   type="number"
                   placeholder="15000"
@@ -37,35 +34,35 @@ export const Home = () => {
                   {...register("price")}
                 />
               </div>
-              <div className="input-group w-[40%] flex flex-col gap-2 ">
-                <label for="price">Purpose of work</label>
+              <div className="input-group w-full md:w-[40%] flex flex-col gap-2 ">
+                <label htmlFor ="price">Purpose of work</label>
                 <select className="dropdown" {...register("usageType")}>
-                  <option value="student" key="">
+                  <option value="student" >
                     student
                   </option>
-                  <option value="business" key="">
+                  <option value="business" >
                     business
                   </option>
-                  <option value="designer" key="">
+                  <option value="designer" >
                     designer
                   </option>
-                  <option value="workstation" key="">
+                  <option value="workstation" >
                     workstation
                   </option>
-                  <option value="gaming" key="">
+                  <option value="gaming" >
                     gaming
                   </option>
-                  <option value="convertible" key="">
+                  <option value="convertible" >
                     convertible
                   </option>
                 </select>
               </div>
-              <div className="input-group flex flex-col gap-2 ">
+              <div className="input-group flex flex-col gap-2 w-full md:w-[20%]">
                 <label className="invisible">purchase</label>
                 <input
                   type="submit"
                   value="Purchase"
-                  className="btn-filled self-center border-2 border-blue"
+                  className="btn-filled self-center w-full px-4"
                 />
               </div>
             </form>
@@ -76,7 +73,7 @@ export const Home = () => {
       <section className="brands h-max bg-white">
         <div className="container h-full custom-flex flex-col">
           <h1 className="tertiary-heading text-black">Popular Brands</h1>
-          <div className="custom-flex flex-wrap justify-between w-full mt-6">
+          <div className="custom-flex flex-col sm:flex-wrap sm:flex-row gap-4 justify-between w-full mt-6">
             <img
               src="https://placehold.co/150x100"
               alt="Laptop with blue screen"
@@ -104,7 +101,7 @@ export const Home = () => {
       <section className="categories h-max bg-white">
         <div className="container h-full custom-flex flex-col">
           <h1 className="tertiary-heading text-black">Popular Categories</h1>
-          <div className="custom-flex justify-between w-full flex-wrap mt-6">
+          <div className="custom-flex flex-col sm:flex-wrap sm:flex-row gap-4 justify-between w-full mt-6  ">
             <img
               src="https://placehold.co/150x100"
               alt="Laptop with blue screen"
@@ -131,25 +128,25 @@ export const Home = () => {
 
       <section className="recent-listings h-full">
         <div className="container custom-flex flex-col">
-          <div className="w-full custom-flex relative">
+          <div className="w-full custom-flex">
             <h1 className="tertiary-heading">Most Recent Listings</h1>
-            <span className="absolute right-0 top-1/2 text-blue underline">
-              <Link to="/all-products">See All</Link>
-            </span>
           </div>
-          {isError ? <Error /> : ""}
-          {isLoading ? (
+          {error ? <Error/> : ""}
+          {isFetching ? (
             <Loader />
           ) : (
-            <div className="custom-flex justify-between flex-wrap gap-8 mt-6">
+            <div className="custom-flex justify-between flex-col sm:flex-wrap sm:flex-row gap-8 mt-6 ">
               {laptops &&
-                laptops.slice(0, 8).map((laptop) => (
-                  <Link to={`/${laptop.name}/${laptop._id}`} key={laptop._id}>
-                    <ProductCard props={laptop} />
-                  </Link>
-                ))}
+                laptops
+                  .slice(0, 8)
+                  .map((laptop) => (
+                    <ProductCard key={laptop._id} props={laptop} />
+                  ))}
             </div>
           )}
+          <span className="mt-4 text-blue underline text-base">
+            <Link to="/all-products">See All</Link>
+          </span>
         </div>
       </section>
     </main>

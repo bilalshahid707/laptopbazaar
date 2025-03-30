@@ -1,11 +1,19 @@
-import { ProductCard } from "../imports";
-import { useGetSupplierLaptopsQuery } from "../Services/suppliersApi";
+import { ProductCard} from "../imports";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import {Error,Loader} from "../imports"
 export const SupplierProducts = () => {
 
   const {suppliername} = useParams()
-  let {data:laptops} = useGetSupplierLaptopsQuery(suppliername)
-  laptops = laptops.data
+  const {data,error,isLoading} = useQuery({
+    queryKey:['laptops'],
+    queryFn:async()=>{
+      const response = await axios.get(`http://127.0.0.1:8000/api/v1/suppliers/${suppliername}`)
+      return response.data
+    }
+  })
+  const laptops = data?.data
 
   return (
     <main>
@@ -20,10 +28,12 @@ export const SupplierProducts = () => {
 
       <section className="h-full">
         <div className="container custom-flex flex-col">
-        <div className="custom-flex justify-between flex-wrap gap-8 mt-6">
-          {laptops && laptops.map((laptop)=>(
+        <div className="custom-flex flex-col sm:flex-wrap sm:flex-row justify-between gap-8 mt-6">
+          {error?<Error/>:''}
+          {isLoading?<Loader/>:''}
+          {laptops && laptops.length>0?laptops.map((laptop)=>(
             <ProductCard props={laptop}/>
-          ))}
+          )):<div>No Products Found</div>}
         </div>
         </div>
       </section>

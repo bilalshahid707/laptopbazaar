@@ -17,7 +17,16 @@ module.exports = {
         primaryHeading:'5rem',
         secondaryHeading:'2.5rem',
         tertiaryHeading:'1.5rem'
-      }
+      },
+      screens: {
+        'xs': '480px',
+        'sm': '600px',  
+        'md': '768px',
+        'lg': '1024px',  
+        'xl': '1280px',  
+        '2xl': '1536px', 
+        '3xl': '1920px', 
+      },
     },
   },
   plugins: [],

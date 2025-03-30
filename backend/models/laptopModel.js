@@ -60,13 +60,15 @@ const laptopSchema = new mongoose.Schema(
     },
     ratingsQuantity: {
       type: Number,
+      default:0
     },
     avgRating: {
       type: Number,
+      default:0
     },
     description: {
       type: String,
-      reuired: [true, "Enter product description"],
+      required: [true, "Enter product description"],
     },
     supplier: {
       type: mongoose.Schema.ObjectId,
@@ -92,6 +94,7 @@ laptopSchema.virtual('reviews',{
 // Middlewares
 laptopSchema.pre(/^find/, function (next) {
   this.populate("supplier");
+  this.sort({listedAt:-1})
   next();
 });
 

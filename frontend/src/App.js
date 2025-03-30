@@ -1,12 +1,59 @@
-import './App.css';
-import { Header,Footer } from './imports';
-import { AllRoutes } from './imports';
+import "./App.css";
+import { useMemo, useState } from "react";
+import { Header, Footer } from "./imports";
+import { AllRoutes, Loader } from "./imports";
+import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { logUser, setUser } from "./Services/UserAuth";
+import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 function App() {
+  const cookie = Cookies.get("jwt");
+  const dispatch = useDispatch();
+  const [loader, setLoader] = useState(true);
+  setTimeout(() => {
+    setLoader(false);
+  }, 3000);
+  
+  const { data, isSuccess } = useQuery({
+    queryKey: ["userdata", cookie],
+    queryFn: async () => {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/v1/users/setuserdata`,
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("jwt")}`,
+          },
+        }
+      );
+      return response.data;
+    },
+  });
+  useEffect(() => {
+    if (cookie) {
+      dispatch(logUser(true));
+      if (isSuccess) {
+        dispatch(setUser(data.data));
+      }
+    }
+  }, [cookie, isSuccess]);
   return (
     <>
-    <Header/>
-    <AllRoutes/>
-    <Footer/>
+      {loader ? (
+        <div className="custom-flex flex-col h-[100vh] loader">
+          <img
+            className="w-56 h-56 animate-pulse"
+            src="/assets/logo-main.png"
+            alt=""
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      <Header />
+      <AllRoutes />
+      <Footer />
     </>
   );
 }

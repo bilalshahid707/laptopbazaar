@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { buildQuery } from "../../utils/buildQuery";
+// import { buildQuery } from "../../utils/buildQuery";
 import { useNavigate } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";
 
@@ -14,8 +14,14 @@ export const DrawerList = ({ open, onClose }) => {
   }, [open]);
 
   const onSubmit = (data) => {
-    const query = buildQuery(data);
-    navigate(`${query}`);
+    const filteredData={}
+    for  (const [key,value] of Object.entries(data)){
+      if (value!==""){
+        filteredData[key]=value
+      }
+    }
+    const query = new URLSearchParams(filteredData);
+    navigate(`?${query.toString()}`);
     setOpenBar(false);
     onClose(false);
   };

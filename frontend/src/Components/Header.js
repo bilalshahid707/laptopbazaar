@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useTheme } from "@emotion/react";
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
-
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Cookies from "js-cookie";
 export const Header = () => {
-  const [searchValue,setSearchValue] = useState('')
-  const handleSearch=()=>{
-    
+  const isLoggedIn = useSelector((state) => state.User.LoggedIn);
+  const user = useSelector((state) => state.User.User);
+  
+  const [openMenu, setOpenMenu] = useState(false);
+  const handleMenu = () => {
+    setOpenMenu(!openMenu);
+  };
+
+  const [dropdown,setDropdown] = useState(false)
+
+  const logOut = ()=>{
+    Cookies.remove('jwt')
+    location.assign('/')
   }
-  const [openMenu,setOpenMenu] = useState(false)
-  const handleMenu = ()=>{
-    setOpenMenu(!openMenu)
-  }
-  console.log('render')
+
   return (
-    <header className="w-full shadow-xl bg-white" >
-      <nav>
+    <header className="w-full shadow-xl bg-white">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a
             href="https://flowbite.com/"
@@ -31,13 +36,15 @@ export const Header = () => {
             </span>
           </a>
           <div className="relative hidden md:block min-w-96 w-1/2">
-          <form>
+            <form>
               <input
                 type="text"
                 id="search-navbar"
                 className="block w-full p-2 ps-4 h-10 text-sm text-blue border border-gray-300 rounded-lg bg-whiteAccent focus:border-blue outline-none "
                 placeholder="Search for laptops"
-                onChange={(e)=>{setSearchValue(e.target.value)}}
+                onChange={(e) => {
+                  setSearchValue(e.target.value);
+                }}
               />
               <div className="absolute inset-y-0 right-4 cursor-pointer flex items-center ps-3 ">
                 <svg
@@ -57,10 +64,10 @@ export const Header = () => {
                 </svg>
                 <span className="sr-only cursor-pointer">Search icon</span>
               </div>
-              </form>
-            </div>
+            </form>
+          </div>
 
-            {/* ************** Navigation buttons on mobile *************** */}
+          {/* ************** Navigation buttons on mobile *************** */}
           <div className="flex md:order-2 gap-3">
             <button
               onClick={handleMenu}
@@ -116,7 +123,9 @@ export const Header = () => {
 
           {/* **************** Mobile Search Bar **************** */}
           <div
-            className={`items-center justify-between w-full md:flex md:w-auto md:h-0  ${openMenu?"opacity-0 h-0":"opacity-1 h-48"} transition-all z-10`}
+            className={`items-center justify-between w-full md:flex md:w-auto md:h-0  ${
+              openMenu ? "opacity-0 h-0" : "opacity-1 h-48"
+            } transition-all z-10`}
             id="navbar-search"
           >
             <div className="relative mt-3 md:hidden">
@@ -144,13 +153,39 @@ export const Header = () => {
                 placeholder="Search for laptops"
               />
             </div>
-            <div className="cta-buttons flex w-full gap-4 flex-col p-4 pr-0 pl-0 md:p-0 md:flex-row">
-              <Link to={"/login"} className="btn-filled text-center">Log in</Link>
-              <Link to={"/signup"} className="btn-outlined">Sign up</Link>
-            </div>
+            {isLoggedIn ? (
+              <div className="relative">
+              <div onClick={()=>{setDropdown(!dropdown)}} className={`cursor-pointer cta-buttons custom-flex w-full gap-4 flex-col p-2 rounded-lg md:flex-row hover:bg-whiteAccent`}>
+                <div className="h-10 w-10 rounded-full bg-black"></div>
+                <div className="text-base capitalize">{user?.name}</div>
+              </div>
+              <div className={`absolute dropdown mt-2 bg-whiteAccent h-max w-48 border-none ${dropdown?'block':'hidden'}`}>
+                <ul className="dropdownlist">
+                  <li className="dropdown-item p-2 hover:bg-white rounded-lg"><Link onClick={logOut}>Log Out</Link></li>
+                  <li className="dropdown-item p-2 hover:bg-white rounded-lg"><Link to={user?.role==='user'?'/new-supplier':`/${user?.slug}`}>{user?.role==='user'?'Become Supplier':'See Profile'}</Link></li>
+                  {user?.role==='supplier' || user?.role==='admin'?<li className="dropdown-item p-2 hover:bg-white rounded-lg"><Link to={'/dashboard/settings'}>Settings</Link></li>:''}
+                </ul>
+              </div>
+              </div>
+            ) : (
+              <div className="cta-buttons flex w-full gap-4 flex-col p-4 pr-0 pl-0 md:p-0 md:flex-row">
+                <Link to={"/login"} className="btn-filled text-center">
+                  Log in
+                </Link>
+                <Link to={"/signup"} className="btn-outlined">
+                  Sign up
+                </Link>
+              </div>
+            )}
           </div>
         </div>
-      </nav>
+        <nav className="bg-blue">
+          <ul className="custom-flex gap-8 p-3 text-base text-white">
+            <li><Link to={'/'}>Home</Link></li>
+            <li><Link to={'/all-products'}>All Laptops</Link></li>
+            <li><Link>About us</Link></li>
+          </ul>
+        </nav>
     </header>
   );
 };

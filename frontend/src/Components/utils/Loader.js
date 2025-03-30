@@ -1,9 +1,8 @@
 import React from "react";
-import { CircularProgress } from "@mui/material";
 export const Loader = () => {
   return (
-    <div className="custom-flex h-[100vh]">
-      <CircularProgress />
+    <div className="custom-flex flex-col h-[100vh]">
+      <img className="w-56 h-56 animate-pulse" src="/assets/logo-main.png" alt="" />
     </div>
   );
 };
