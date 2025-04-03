@@ -23,6 +23,5 @@ Router.route("/setuserdata").get(authController.setUserData);
 Router.use(authController.protect, authController.restrictTo("admin"));
 Router.route("/:id")
   .delete(userController.deleteUser)
-  .patch(userController.updateme);
 
 module.exports = Router;
