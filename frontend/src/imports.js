@@ -29,7 +29,6 @@ export { DrawerList } from "./Components/utils/DrawerList";
 export { TestimonialCard } from "./Components/utils/TestimonialCard";
 export { Loader } from "./Components/utils/Loader";
 export {Snack} from "./Components/utils/Snack"
-export {PaginationHandler} from "./Components/utils/PaginationHandler"
 // Routes
 export { AllRoutes } from "./Routes/AllRoutes";
 
@@ -37,6 +36,7 @@ export { AllRoutes } from "./Routes/AllRoutes";
 export {useAuth} from "./Hooks/useAuth"
 export {useLaptops} from "./Hooks/useLaptops"
 
+// Forms
 export {ProductForm} from "./Components/forms/ProductForm"
 export {PasswordForm} from "./Components/forms/PasswordForm"
 export {BusinessForm} from "./Components/forms/BusinessForm"

@@ -23,12 +23,13 @@ export const SettingsForm = () => {
     queryKey: ["settings"],
     mutationFn: async (body) => {
       const response = await axios.patch(
-        "http://127.0.0.1:8000/api/v1/users/updateme",
+        "http://127.0.0.1:8000/api/v1/suppliers",
         body,
         {
           headers: {
             "Content-type": "application/json",
             Authorization: `Bearer ${Cookies.get("jwt")}`,
+            "userid":`${user?._id}`
           },
         }
       );
@@ -52,7 +53,7 @@ export const SettingsForm = () => {
 
   return (
     <>
-    <Snack open={openSnack} severity={snackType} message={snackMsg}/>
+    <Snack open={openSnack} severity={snackType} message={snackMsg} onClose={()=>{setOpenSnack(false)}}/>
     <form
       onSubmit={handleSubmit(onSubmit)}
       className=" w-full custom-flex flex-col gap-4 h-full"

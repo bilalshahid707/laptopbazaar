@@ -30,7 +30,7 @@ export const BusinessForm = () => {
       const filteredData =
         user.role === "supplier" ? { ...body, role: "supplier" } : { ...body };
       const response = await axios.patch(
-        "http://127.0.0.1:8000/api/v1/users/updateme",
+        "http://127.0.0.1:8000/api/v1/suppliers",
         filteredData,
         {
           headers: {
@@ -60,7 +60,7 @@ export const BusinessForm = () => {
 
   return (
     <>
-      <Snack open={openSnack} severity={snackType} message={snackMsg} />
+      <Snack open={openSnack} severity={snackType} message={snackMsg} onClose={()=>{setOpenSnack(false)}} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full custom-flex flex-col gap-4 flex-grow"

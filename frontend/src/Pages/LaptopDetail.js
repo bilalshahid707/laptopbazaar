@@ -13,7 +13,7 @@ export const LaptopDetail = () => {
   const { id } = useParams();
   const { register, handleSubmit, reset } = useForm();
 
-  const [coverImage, setCoverImage] = useState()
+  const [coverImage, setCoverImage] = useState();
 
   const [openSnack, setOpenSnackBar] = useState(false);
   const [snackMsg, setSnackMsg] = useState("");
@@ -28,7 +28,6 @@ export const LaptopDetail = () => {
   const {
     data: laptopData,
     isFetching: laptopLoading,
-    error,
     refetch,
   } = useQuery({
     queryKey: ["laptop", id],
@@ -91,9 +90,11 @@ export const LaptopDetail = () => {
             <div className="container custom-flex lg:flex-row flex-col gap-4 items-start">
               <div className="images lg:w-[60%] w-full h-full">
                 <div className="h-72 lg:h-96">
-                  {laptop?.images[0]? (
+                  {laptop?.images[0] ? (
                     <img
-                      src={`http://localhost:8000/laptops/${coverImage?coverImage:laptop?.images[0]}`}
+                      src={`http://localhost:8000/laptops/${
+                        coverImage ? coverImage : laptop?.images[0]
+                      }`}
                       alt="Laptop Display"
                       className="max-w-full h-full object-cover mx-auto"
                     />
@@ -153,13 +154,14 @@ export const LaptopDetail = () => {
                       </Link>
                     </div>
                   </div>
-                  <button className="w-full btn-filled">
-                    Show phone number
-                  </button>
-                  <button className="w-full btn-outlined">
-                    <a href="https://wa.me/03203529002?text=Hello%20there!"></a>{" "}
+                  <a
+                    href="https://wa.me/+923074204514?text=Hello%20there!"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full btn-outlined text-center block"
+                  >
                     Chat
-                  </button>
+                  </a>
                 </div>
 
                 <div className="box">

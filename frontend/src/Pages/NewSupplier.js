@@ -12,7 +12,7 @@ export const NewSupplier = () => {
       const response = await axios.post("http://127.0.0.1:8000/api/v1/suppliers",body,{
         headers:{
           "Content-Type":"application/json",
-          'userId':`${user?._id}`
+          'userid':`${user?._id}`
         }
       })
       return response.data
