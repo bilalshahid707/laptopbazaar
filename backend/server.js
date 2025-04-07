@@ -6,7 +6,7 @@ const morgan = require('morgan')
 const globalErrorHandler = require('./controllers/errorController')
 const mongoose = require('mongoose')
 const DB = process.env.DATABASE.replace("<PASSWORD>",process.env.MONGO_PASS)
-const model = require('./models/laptopModel')
+
 mongoose.connect(DB,{
     useNewUrlParser:true,
 }).then(

@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const catchAsync = require("../utils/catchAysnc");
 const AppError = require("../utils/AppError");
 const userModel = require("../models/userModel");
-const { promisify } = require("util");
 
 const signToken = (id) => {
   return jwt.sign({ id: id }, process.env.JWT_SECRET, {
@@ -71,7 +70,6 @@ exports.setUserData = catchAsync(async(req,res,next)=>{
 })
 
 exports.protect = catchAsync(async (req, res, next) => {
-  console.log(req.cookies)
   let token;
   if (
     req.headers.authorization &&

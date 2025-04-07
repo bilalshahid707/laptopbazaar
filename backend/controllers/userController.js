@@ -1,5 +1,4 @@
 const userModel = require("../models/userModel");
-const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAysnc");
 const multerUpload = require("./multer");
 
@@ -47,7 +46,7 @@ exports.deleteUser = catchAsync(async (req, res) => {
   });
 });
 
-exports.uploadImages = multerUpload.upload.array("images", 5);
+exports.uploadImages = multerUpload.upload.single("image");
 exports.resizeImages = catchAsync(async (req, res, next) => {
   if (!req.files) return next();
   req.body.images = [];

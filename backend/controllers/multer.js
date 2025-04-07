@@ -1,6 +1,4 @@
 const multer = require("multer");
-const sharp = require("sharp");
-const path = require('path')
 
 const storage = multer.memoryStorage();
 const multerFilter = (req, file, cb) => {

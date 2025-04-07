@@ -1,7 +1,6 @@
 const userModel = require("../models/userModel");
 const laptopModel = require("../models/laptopModel");
 const catchAsync = require("../utils/catchAysnc");
-const AppError = require("../utils/AppError");
 
 exports.getAllSuppliers = catchAsync(async (req, res) => {
   const suppliers = await userModel.supplier.find();
@@ -34,14 +33,9 @@ exports.createSupplier = catchAsync(async (req, res, next) => {
   let newSupplier;
   const supplierData = { ...req.body, role: "supplier" };
 
-  // Preventing use of email of another user
+  // If supplier has signed up as user before then updating to supplier
   const supplier = await userModel.user.findOne({ email: req.body.email });
   if (supplier) {
-    if (req.headers.userid && req.headers.userid !== supplier.id) {
-      return next(
-        new AppError("Your personal email is in use by another user", 400)
-      );
-    }
     Object.assign(supplier, supplierData);
     await supplier.save();
     newSupplier = supplier;
@@ -56,23 +50,12 @@ exports.createSupplier = catchAsync(async (req, res, next) => {
 });
 
 exports.updateSupplier = catchAsync(async (req, res) => {
-    const supplier = await userModel.user.findOne({id:req.user._id})
   const updatedSupplier = await userModel.user.findByIdAndUpdate(
     req.user._id,
     req.body,
     { overwriteDiscriminatorKey: true, new: true }
   );
-  //   if (
-  //     updatedSupplier &&
-  //     req.headers.userid &&
-  //     req.headers.userid !== updatedSupplier._id
-  //   ) {
-  //     return next(
-  //       new AppError("Your personal email is in use by another user", 400)
-  //     );
-  //   }
 
-  console.log(supplier);
   res.status(201).json({
     status: "success",
     data: updatedSupplier,
