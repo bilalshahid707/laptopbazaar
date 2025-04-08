@@ -16,6 +16,6 @@ mongoose.connect(DB,{
 console.log(process.env.NODE_ENV)
 
 app.use(globalErrorHandler);
-app.listen(port,()=>{
-    console.log(`Listenig requests on port ${port}`)
-})
+// app.listen(port,()=>{
+//     console.log(`Listenig requests on port ${port}`)
+// })
