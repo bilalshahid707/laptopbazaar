@@ -12,7 +12,7 @@ const app = express()
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser())
 app.use(cors({
-  origin: "*", 
+  origin: ["https://laptopbazaar.netlify.app/"], 
   credentials: true, 
   methods: ["GET", "POST", "PUT", "DELETE","OPTIONS","PATCH"],
   allowedHeaders: ["Content-Type", "Authorization","Set-cookie","userId"],
