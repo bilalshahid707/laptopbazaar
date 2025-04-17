@@ -15,6 +15,7 @@ export const Home = () => {
   };
   
   const laptops = data?.data;
+  console.log(laptops)
 
   return (
     <main className="h-full">
