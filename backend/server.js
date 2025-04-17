@@ -1,7 +1,7 @@
 const app = require('./app')
 const dotenv = require('dotenv')
 dotenv.config({path:'./config.env'})
-const port = process.env.PORT
+const port = process.env.PORT || 8000
 const morgan = require('morgan')
 const globalErrorHandler = require('./controllers/errorController')
 const mongoose = require('mongoose')
