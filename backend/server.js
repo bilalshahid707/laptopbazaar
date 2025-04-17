@@ -13,12 +13,7 @@ mongoose.connect(DB,{
     console.log("DB connection successful")
 )
 
-console.log(process.env.NODE_ENV)
-
 app.use(globalErrorHandler);
-app.get('/', (req, res) => {
-    res.send('Hello, World!');
-  });
 app.listen(port,()=>{
     console.log(`Listenig requests on port ${port}`)
 })
