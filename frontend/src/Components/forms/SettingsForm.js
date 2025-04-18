@@ -23,7 +23,7 @@ export const SettingsForm = () => {
     queryKey: ["settings"],
     mutationFn: async (body) => {
       const response = await axios.patch(
-        `${process.env.BASEURL}/api/v1/suppliers`,
+        `${process.env.REACT_APP_BASEURL}/api/v1/suppliers`,
         body,
         {
           headers: {

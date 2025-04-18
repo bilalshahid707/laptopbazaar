@@ -9,7 +9,7 @@ export const UpdateLaptop = () => {
     let {data:laptop,isLoading} = useQuery({
         queryKey:['laptop',id],
         queryFn:async()=>{
-            const response = await axios.get(`${process.env.BASEURL}/api/v1/laptops/${id}`)
+            const response = await axios.get(`${process.env.REACT_APP_BASEURL}/api/v1/laptops/${id}`)
             return response.data
         }
     })

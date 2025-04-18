@@ -5,7 +5,7 @@ export const useLaptops = ({searchParams}) => {
     queryKey: ["laptops", searchParams],
     queryFn: async () => {
       const response = await axios.get(
-        `${process.env.BASEURL}/api/v1/laptops/${searchParams && searchParams}`
+        `${process.env.REACT_APP_BASEURL}/api/v1/laptops/${searchParams && searchParams}`
       );
       return response.data;
     },

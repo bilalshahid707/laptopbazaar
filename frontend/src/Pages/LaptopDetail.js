@@ -33,7 +33,7 @@ export const LaptopDetail = () => {
     queryKey: ["laptop", id],
     queryFn: async () => {
       const response = await axios.get(
-        `${process.env.BASEURL}/api/v1/laptops/${id}`
+        `${process.env.REACT_APP_BASEURL}/api/v1/laptops/${id}`
       );
       return response.data;
     },
@@ -44,7 +44,7 @@ export const LaptopDetail = () => {
     queryKey: ["newreview"],
     mutationFn: async (body) => {
       const response = await axios.post(
-        `${process.env.BASEURL}/api/v1/reviews/`,
+        `${process.env.REACT_APP_BASEURL}/api/v1/reviews/`,
         body,
         {
           headers: {
@@ -92,7 +92,7 @@ export const LaptopDetail = () => {
                 <div className="h-72 lg:h-96">
                   {laptop?.images[0] ? (
                     <img
-                      src={`${process.env.BASEURL}/laptops/${
+                      src={`${process.env.REACT_APP_BASEURL}/laptops/${
                         coverImage ? coverImage : laptop?.images[0]
                       }`}
                       alt="Laptop Display"

@@ -9,7 +9,7 @@ export const Testimonials = () => {
   const { data } = useQuery({
     queryKey:['reviews'],
     queryFn:async()=>{
-      const response = await axios.get(`${process.env.BASEURL}/api/v1/reviews/${id}`)
+      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/api/v1/reviews/${id}`)
       return response.data
     }
   });

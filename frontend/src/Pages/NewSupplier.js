@@ -9,7 +9,7 @@ export const NewSupplier = () => {
   const mutation = useMutation({
     queryKey:["supplier"],
     mutationFn:async(body)=>{
-      const response = await axios.post(`${process.env.BASEURL}/api/v1/suppliers`,body,{
+      const response = await axios.post(`${process.env.REACT_APP_BASEURL}/api/v1/suppliers`,body,{
         headers:{
           "Content-Type":"application/json",
           'userid':`${user?._id}`

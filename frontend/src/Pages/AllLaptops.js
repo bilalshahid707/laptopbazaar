@@ -18,7 +18,7 @@ export const AllLaptops = () => {
   const { data: laptopStats } = useQuery({
     queryFn: async () => {
       const response = await axios.get(
-        `${process.env.BASEURL}/api/v1/laptops/get-stats`
+        `${process.env.REACT_APP_BASEURL}/api/v1/laptops/get-stats`
       );
       return response.data;
     },

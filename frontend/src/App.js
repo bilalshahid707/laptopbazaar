@@ -20,7 +20,7 @@ function App() {
     queryKey: ["userdata", cookie],
     queryFn: async () => {
       const response = await axios.get(
-        `${process.env.BASEURL}/api/v1/users/setuserdata`,
+        `${process.env.REACT_APP_BASEURL}/api/v1/users/setuserdata`,
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("jwt")}`,

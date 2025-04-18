@@ -10,7 +10,7 @@ export const PasswordForm = () => {
     queryKey: ["changepassword"],
     mutationFn: async (body) => {
       const response = await axios.patch(
-        `${process.env.BASEURL}/api/v1/users/updatepassword`,
+        `${process.env.REACT_APP_BASEURL}/api/v1/users/updatepassword`,
         body,
         {
           headers: {
