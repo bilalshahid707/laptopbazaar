@@ -112,7 +112,7 @@ export const LaptopDetail = () => {
                       onClick={() => setCoverImage(image)}
                       key={image}
                       className="w-32 h-24 cursor-pointer object-cover"
-                      src={`http://localhost:8000/laptops/${image}`}
+                      src={`${process.env.REACT_APP_BASEURL}/laptops/${image}`}
                       alt={laptop?.name}
                     />
                   ))}
