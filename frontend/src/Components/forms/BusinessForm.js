@@ -30,7 +30,7 @@ export const BusinessForm = () => {
       const filteredData =
         user.role === "supplier" ? { ...body, role: "supplier" } : { ...body };
       const response = await axios.patch(
-        "http://127.0.0.1:8000/api/v1/suppliers",
+      `${process.env.BASEURL}/api/v1/suppliers`,
         filteredData,
         {
           headers: {

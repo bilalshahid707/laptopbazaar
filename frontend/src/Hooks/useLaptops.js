@@ -5,7 +5,7 @@ export const useLaptops = ({searchParams}) => {
     queryKey: ["laptops", searchParams],
     queryFn: async () => {
       const response = await axios.get(
-        `https://guarded-temple-22781-100bc7fec95c.herokuapp.com/api/v1/laptops/${searchParams && searchParams}`
+        `${process.env.BASEURL}/api/v1/laptops/${searchParams && searchParams}`
       );
       return response.data;
     },

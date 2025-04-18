@@ -31,7 +31,7 @@ export const ProductForm = ({ laptop }) => {
     mutationFn: async (body) => {
       const response = await (laptop
         ? axios.patch(
-            `http://127.0.0.1:8000/api/v1/laptops/${laptop?._id}`,
+            `${process.env.BASEURL}/api/v1/laptops/${laptop?._id}`,
             body,
             {
               headers: {
@@ -40,7 +40,7 @@ export const ProductForm = ({ laptop }) => {
               },
             }
           )
-        : axios.post(`http://127.0.0.1:8000/api/v1/laptops/`, body, {
+        : axios.post(`${process.env.BASEURL}/api/v1/laptops/`, body, {
             headers: {
               "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${Cookies.get("jwt")}`,

@@ -9,7 +9,7 @@ export const NewSupplier = () => {
   const mutation = useMutation({
     queryKey:["supplier"],
     mutationFn:async(body)=>{
-      const response = await axios.post("http://127.0.0.1:8000/api/v1/suppliers",body,{
+      const response = await axios.post(`${process.env.BASEURL}/api/v1/suppliers`,body,{
         headers:{
           "Content-Type":"application/json",
           'userid':`${user?._id}`

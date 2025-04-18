@@ -9,7 +9,7 @@ export const SupplierProducts = () => {
   const {data,error,isLoading} = useQuery({
     queryKey:['laptops'],
     queryFn:async()=>{
-      const response = await axios.get(`http://127.0.0.1:8000/api/v1/suppliers/${suppliername}`)
+      const response = await axios.get(`${process.env.BASEURL}/api/v1/suppliers/${suppliername}`)
       return response.data
     }
   })

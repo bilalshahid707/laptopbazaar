@@ -34,9 +34,9 @@ export const Laptops = () => {
     queryKey: ["laptops"],
     queryFn: async () => {
       const response = user?.role === "admin"?await axios.get(
-        `http://127.0.0.1:8000/api/v1/laptops`
+        `${process.env.BASEURL}/api/v1/laptops`
       ):await axios.get(
-        `http://127.0.0.1:8000/api/v1/suppliers/${user?.slug}/all-laptops`
+        `${process.env.BASEURL}/api/v1/suppliers/${user?.slug}/all-laptops`
       );
       return response.data;
     },
@@ -45,7 +45,7 @@ export const Laptops = () => {
     queryKey: ["laptops"],
     mutationFn: async (id) => {
       const response = await axios.delete(
-        `http://127.0.0.1:8000/api/v1/laptops/${id}`,
+        `${process.env.BASEURL}/api/v1/laptops/${id}`,
         {
           headers: {
             "Content-Type": "application/json",

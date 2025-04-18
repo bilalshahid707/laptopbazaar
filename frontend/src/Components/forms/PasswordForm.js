@@ -10,7 +10,7 @@ export const PasswordForm = () => {
     queryKey: ["changepassword"],
     mutationFn: async (body) => {
       const response = await axios.patch(
-        "http://127.0.0.1:8000/api/v1/users/updatepassword",
+        `${process.env.BASEURL}/api/v1/users/updatepassword`,
         body,
         {
           headers: {

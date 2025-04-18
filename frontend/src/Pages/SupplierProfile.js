@@ -11,7 +11,7 @@ export const SupplierProfile = () => {
     queryKey: ["supplier", suppliername],
     queryFn: async () => {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/v1/suppliers/${suppliername}`
+        `${process.env.BASEURL}/api/v1/suppliers/${suppliername}`
       );
       return response.data;
     },
@@ -21,7 +21,7 @@ export const SupplierProfile = () => {
     queryKey: ["laptops", suppliername],
     queryFn: async () => {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/v1/suppliers/${suppliername}/all-laptops`
+        `${process.env.BASEURL}/api/v1/suppliers/${suppliername}/all-laptops`
       );
       return response.data;
     },

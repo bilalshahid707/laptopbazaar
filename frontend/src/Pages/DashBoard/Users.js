@@ -28,7 +28,7 @@ export const Users = () => {
   let { data: users } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const response = await axios.get("http://127.0.0.1:8000/api/v1/users", {
+      const response = await axios.get(`${process.env.BASEURL}/api/v1/users`, {
         headers: {
           Authorization: `Bearer ${Cookies.get("jwt")}`,
         },
@@ -40,7 +40,7 @@ export const Users = () => {
     queryKey: ["users"],
     mutationFn: async (id) => {
       const response = await axios.delete(
-        `http://127.0.0.1:8000/api/v1/users/${id}`,
+        `${process.env.BASEURL}/api/v1/users/${id}`,
         {
           headers: {
             "Content-Type": "application/json",

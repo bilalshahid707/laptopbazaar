@@ -442,7 +442,7 @@
             "description": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
             "sourceLocation": {
               "type": "source-location",
-              "url": "http://127.0.0.1:8000/api/v1/laptops/",
+              "url": "${process.env.BASEURL}/api/v1/laptops/",
               "urlProvider": "network",
               "line": 0,
               "column": 0
@@ -1062,7 +1062,7 @@
             "entity": "localhost"
           },
           {
-            "url": "http://127.0.0.1:8000/api/v1/laptops/",
+            "url": "${process.env.BASEURL}/api/v1/laptops/",
             "sessionTargetType": "page",
             "protocol": "http/1.1",
             "rendererStartTime": 970.9579999446869,
@@ -1166,7 +1166,7 @@
             "rtt": 213.373
           },
           {
-            "origin": "http://127.0.0.1:8000",
+            "origin": "${process.env.BASEURL}",
             "rtt": 2.6180000000000003
           }
         ],
@@ -1201,7 +1201,7 @@
         ],
         "items": [
           {
-            "origin": "http://127.0.0.1:8000",
+            "origin": "${process.env.BASEURL}",
             "serverResponseTime": 30014.265000000003
           },
           {
@@ -1477,7 +1477,7 @@
               "type": "subitems",
               "items": [
                 {
-                  "url": "http://127.0.0.1:8000/api/v1/laptops/",
+                  "url": "${process.env.BASEURL}/api/v1/laptops/",
                   "mainThreadTime": 0,
                   "blockingTime": 0,
                   "transferSize": 3943,
@@ -6450,7 +6450,7 @@
             "totalBytes": 4123
           },
           {
-            "url": "http://127.0.0.1:8000/api/v1/laptops/",
+            "url": "${process.env.BASEURL}/api/v1/laptops/",
             "totalBytes": 3943
           },
           {
@@ -6929,7 +6929,7 @@
         ],
         "items": [
           {
-            "url": "http://127.0.0.1:8000/api/v1/laptops/",
+            "url": "${process.env.BASEURL}/api/v1/laptops/",
             "totalBytes": 3654,
             "wastedBytes": 2784
           }
@@ -8595,7 +8595,7 @@
     {
       "name": "127.0.0.1",
       "origins": [
-        "http://127.0.0.1:8000"
+        "${process.env.BASEURL}"
       ],
       "isUnrecognized": true
     }

@@ -17,7 +17,7 @@ export const useAuth = ({ endpoint }) => {
   const mutation = useMutation({
     mutationFn: async (body) => {
       const response = await axios.post(
-        `http://127.0.0.1:8000/api/v1/users/${endpoint}`,
+        `${process.env.BASEURL}/api/v1/users/${endpoint}`,
         body,
         {
           headers: {
