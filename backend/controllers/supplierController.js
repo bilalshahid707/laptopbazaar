@@ -37,10 +37,10 @@ exports.createSupplier = catchAsync(async (req, res, next) => {
   const supplier = await userModel.user.findOne({ email: req.body.email });
   if (supplier) {
     Object.assign(supplier, supplierData);
-    await supplier.save();
+    await supplier.save({overwriteDiscriminatorKey:true});
     newSupplier = supplier;
   } else {
-    newSupplier = await userModel.user.create(supplierData);
+    newSupplier = await userModel.user.create(supplierData,{overwriteDiscriminatorKey:true});
   }
 
   res.status(200).json({
