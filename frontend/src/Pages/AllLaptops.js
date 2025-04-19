@@ -46,7 +46,7 @@ export const AllLaptops = () => {
 
   const laptops = laptopsData?.data;
   const numberOfPages = Math.ceil(
-    laptopStats && laptopStats.data[0].totalLaptops / 12
+    laptopStats?.data[0]?.totalLaptops / 12
   );
 
   return (

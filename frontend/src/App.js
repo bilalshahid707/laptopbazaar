@@ -1,5 +1,5 @@
 import "./App.css";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Header, Footer } from "./imports";
 import { AllRoutes, Loader } from "./imports";
 import Cookies from "js-cookie";
@@ -29,6 +29,7 @@ function App() {
       );
       return response.data;
     },
+    enabled:cookie!==undefined
   });
   useEffect(() => {
     if (cookie) {

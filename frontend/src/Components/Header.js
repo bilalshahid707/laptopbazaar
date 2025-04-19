@@ -124,7 +124,7 @@ export const Header = () => {
           {/* **************** Mobile Search Bar **************** */}
           <div
             className={`items-center justify-between w-full md:flex md:w-auto md:h-0  ${
-              openMenu ? "opacity-0 h-0" : "opacity-1 h-48"
+              openMenu ? "hidden opacity-0 h-0" : "opacity-1 h-48"
             } transition-all z-10`}
             id="navbar-search"
           >
@@ -149,7 +149,7 @@ export const Header = () => {
               <input
                 type="text"
                 id="search-navbar"
-                className="block w-full p-2 ps-4 text-sm text-blue border border-gray-300 rounded-lg bg-whiteAccent focus:border-blue outline-none"
+                className="w-full p-2 ps-4 text-sm text-blue border border-gray-300 rounded-lg bg-whiteAccent focus:border-blue outline-none"
                 placeholder="Search for laptops"
               />
             </div>

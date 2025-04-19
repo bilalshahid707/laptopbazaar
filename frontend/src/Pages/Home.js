@@ -1,8 +1,18 @@
 import { ProductCard, Loader, useLaptops,Error } from "../imports";
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 export const Home = () => {
+  const {data:brandsData} = useQuery({
+    queryKey:['topBrands'],
+    queryFn:async()=>{
+      const response = await axios.get(`${process.env.REACT_APP_BASEURL}/api/v1/laptops/top-brands`)
+      return response.data
+    },
+  })
+  const topBrands = brandsData?.data
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
@@ -15,7 +25,6 @@ export const Home = () => {
   };
   
   const laptops = data?.data;
-  console.log(laptops)
 
   return (
     <main className="h-full">
@@ -75,54 +84,15 @@ export const Home = () => {
         <div className="container h-full custom-flex flex-col">
           <h1 className="tertiary-heading text-black">Popular Brands</h1>
           <div className="custom-flex flex-col sm:flex-wrap sm:flex-row gap-4 justify-between w-full mt-6">
-            <img
-              src="https://placehold.co/150x100"
-              alt="Laptop with blue screen"
-              className="image"
-            />
-            <img
-              src="https://placehold.co/150x100"
-              alt="Gaming laptop with red backlight"
-              className="image"
-            />
-            <img
-              src="https://placehold.co/150x100"
-              alt="Chromebook with Chrome logo"
-              className="image"
-            />
-            <img
-              src="https://placehold.co/150x100"
-              alt="Convertible laptop with stylus"
-              className="image"
-            />
-          </div>
-        </div>
-      </section>
+            {topBrands?.map(brand=>(
 
-      <section className="categories h-max bg-white">
-        <div className="container h-full custom-flex flex-col">
-          <h1 className="tertiary-heading text-black">Popular Categories</h1>
-          <div className="custom-flex flex-col sm:flex-wrap sm:flex-row gap-4 justify-between w-full mt-6  ">
             <img
-              src="https://placehold.co/150x100"
-              alt="Laptop with blue screen"
+              src={`https://cdn.brandfetch.io/${brand._id}.com/w/419/h/512/theme/dark/logo?c=1ideBpHfGyskwpR_qGJ`}
+              alt={`${brand._id}`}
               className="image"
             />
-            <img
-              src="https://placehold.co/150x100"
-              alt="Gaming laptop with red backlight"
-              className="image"
-            />
-            <img
-              src="https://placehold.co/150x100"
-              alt="Chromebook with Chrome logo"
-              className="image"
-            />
-            <img
-              src="https://placehold.co/150x100"
-              alt="Convertible laptop with stylus"
-              className="image"
-            />
+            ))}
+ 
           </div>
         </div>
       </section>
