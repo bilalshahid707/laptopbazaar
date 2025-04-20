@@ -4,6 +4,7 @@ const laptopController = require("../controllers/laptopController");
 const authController = require("../controllers/authController.js");
 
 Router.route("/get-stats").get(laptopController.getStats);
+Router.route("/top-brands").get(laptopController.topBrands);
 Router.route("/")
   .get(laptopController.getAllLaptops)
   .post(

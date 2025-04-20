@@ -142,10 +142,6 @@ export const Users = () => {
                     }}
                   >
                     <div className="custom-flex gap-2">
-                      {/* <Link to={`/${laptop.name}/${laptop.id}`}>
-                      <RemoveRedEyeIcon />
-                    </Link> */}
-                      <button onClick={()=>makeAdmin(user?._id)} className="btn-filled w-full">Make Admin</button>
                       <Link onClick={() => openDeleteModal(user?._id)}>
                         <DeleteIcon />
                       </Link>

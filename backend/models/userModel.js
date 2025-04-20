@@ -90,9 +90,6 @@ const supplierSchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
-    logo: {
-      type: String,
-    },
   },
   options
 );

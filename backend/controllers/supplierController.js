@@ -64,6 +64,7 @@ exports.updateSupplier = catchAsync(async (req, res) => {
 
 exports.deleteSupplier = catchAsync(async (req, res) => {
   const user = await userModel.supplier.deleteOne({ id: req.params.id });
+  const laptops = await laptopModel.deleteMany({supplier:req.params.id})
   res.status(200).json({
     status: "success",
     data: null,
