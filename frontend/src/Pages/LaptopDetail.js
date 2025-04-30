@@ -155,7 +155,7 @@ export const LaptopDetail = () => {
                     </div>
                   </div>
                   <a
-                    href="https://wa.me/+923074204514?text=Hello%20there!"
+                    href="https://wa.me/+923494939436?text=Hello%20there!"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full btn-outlined text-center block"

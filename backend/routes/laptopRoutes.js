@@ -9,7 +9,7 @@ Router.route("/")
   .get(laptopController.getAllLaptops)
   .post(
     authController.protect,
-    authController.restrictTo("supplier", "admin"),
+    authController.restrictTo("supplier"),
     laptopController.uploadImages,
     laptopController.resizeImages,
     laptopController.createLaptop

@@ -25,7 +25,7 @@ exports.resizeImages = catchAsync(async (req, res, next) => {
   if (!req.files) return next();
   req.body.images = [];
   for (let i = 0; i < req.files.length; i++) {
-    const imageName = `${crypto.randomBytes(24).toString('hex')}-${i+1}.jpeg`;
+    const imageName = `${crypto.randomBytes(24).toString('hex')}.jpeg`;
     req.body.images.push(imageName);
     await sharp(req.files[i].buffer)
       .toFormat("jpeg")

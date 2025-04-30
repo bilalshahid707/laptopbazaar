@@ -80,7 +80,7 @@ export const SupplierProfile = () => {
             <div className="space-y-4">
               <p className="custom-flex text-base text-black justify-start gap-2">
                 <ion-icon name="call"></ion-icon>
-                {supplier?.businessPhone}
+                +923494939436
               </p>
               <p className="custom-flex text-base text-black justify-start gap-2">
                 <ion-icon name="mail"></ion-icon>
@@ -88,20 +88,7 @@ export const SupplierProfile = () => {
               </p>
             </div>
 
-            <div className="flex space-x-4 mt-6 text-blue-600 text-xl">
-              <a href="#" className="hover:text-blue-800">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </a>
-              <a href="#" className="hover:text-blue-800">
-                <ion-icon name="logo-instagram"></ion-icon>
-              </a>
-              <a href="#" className="hover:text-blue-800">
-                <ion-icon name="logo-twitter"></ion-icon>
-              </a>
-              <a href="#" className="hover:text-blue-800">
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </a>
-            </div>
+
           </div>
         </div>
       </section>

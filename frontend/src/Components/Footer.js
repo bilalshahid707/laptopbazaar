@@ -40,17 +40,14 @@ export const Footer = ()=> {
         {/* Follow Us */}
         <div>
           <h3 className="font-semibold text-blue">FOLLOW US</h3>
-          <div className="flex items-center space-x-4 mt-2">
-            <a href="#" className="text-gray-600 hover:text-blue-700">
-              {/* <Facebook size={20} /> */}
-            </a>
-            <a href="#" className="text-gray-600 hover:text-blue-700">
-              {/* <Twitter size={20} /> */}
-            </a>
-            <a href="#" className="text-gray-600 hover:text-blue-700">
-              {/* <Instagram size={20} /> */}
-            </a>
-          </div>
+          <div className="flex space-x-4 mt-6 text-blue-600 text-xl">
+              <a href="https://www.facebook.com/laptopbazaar01" className="hover:text-blue-800">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+              <a href="https://www.instagram.com/laptopbazaar01?igsh=a3lqZXBzYW5jNXQ2" className="hover:text-blue-800">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </div>
         </div>
 
       </div>
