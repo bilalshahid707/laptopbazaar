@@ -92,9 +92,7 @@ export const LaptopDetail = () => {
                 <div className="h-72 lg:h-96">
                   {laptop?.images[0] ? (
                     <img
-                      src={`${process.env.REACT_APP_FILESTORAGEURL}/${
-                        coverImage ? coverImage : laptop?.images[0]
-                      }`}
+                      src={`${coverImage ? coverImage : laptop?.images[0]}`}
                       alt="Laptop Display"
                       className="max-w-full h-full object-cover mx-auto"
                     />
@@ -112,7 +110,7 @@ export const LaptopDetail = () => {
                       onClick={() => setCoverImage(image)}
                       key={image}
                       className="w-32 h-24 cursor-pointer object-cover"
-                      src={`${process.env.REACT_APP_FILESTORAGEURL}/${image}`}
+                      src={`${image}`}
                       alt={laptop?.name}
                     />
                   ))}
