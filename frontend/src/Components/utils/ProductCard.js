@@ -5,7 +5,7 @@ export const ProductCard = ({ props }) => {
   return (
     <Link to={`/${props.name}/${props._id}`}><div className="cursor-pointer hover:scale-105 transition-all max-w-60 min-w-56 rounded-lg border border-gray-200 shadow-sm overflow-hidden bg-white">
       <div className="h-52">
-        <img className="w-full h-full object-cover" src={`${process.env.REACT_APP_BASEURL}/laptops/${props.images[0]}`} alt="" />
+        <img className="w-full h-full object-cover" src={`${process.env.REACT_APP_FILESTORAGEURL}/${props.images[0]}`} alt="" />
       </div>
       <div className="bg-blueAccent p-2 text-sm text-blue font-medium capitalize">
         {props.brand}

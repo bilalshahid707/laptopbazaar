@@ -3,6 +3,8 @@ const catchAsync = require("../utils/catchAysnc");
 const AppError = require("../utils/AppError");
 const ApiFeatures = require("../utils/ApiFeatures");
 const multerUpload = require("./multer");
+const cloudinary = require("./cloudinary");
+const { Readable } = require("stream");
 const sharp = require("sharp");
 const path = require('path')
 const crypto = require("crypto")
@@ -22,17 +24,42 @@ exports.getAllLaptops = catchAsync(async (req, res) => {
 
 exports.uploadImages = multerUpload.upload.array('images',5);
 exports.resizeImages = catchAsync(async (req, res, next) => {
-  if (!req.files) return next();
+  if (!req.files || req.files.length === 0) return next();
+
   req.body.images = [];
+
+  const uploadToCloudinary = (buffer, filename) => {
+    return new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        {
+          folder: "laptops",
+          public_id: filename,
+          format: "jpeg",
+        },
+        (error, result) => {
+          if (error) return reject(new AppError("Cloudinary upload failed", 500));
+          resolve(result.secure_url);
+        }
+      );
+
+      const readable = Readable.from(buffer);
+      readable.pipe(stream);
+    });
+  };
+
   for (let i = 0; i < req.files.length; i++) {
-    const imageName = `${crypto.randomBytes(24).toString('hex')}.jpeg`;
-    req.body.images.push(imageName);
-    await sharp(req.files[i].buffer)
+    const imageName = `${crypto.randomBytes(24).toString("hex")}`;
+    const resizedBuffer = await sharp(req.files[i].buffer)
+      .resize(800) // optional: adjust size
       .toFormat("jpeg")
-      .jpeg({ quality: 100 })
-      .toFile(path.join(__dirname, "../public/laptops", `${imageName}`));
+      .jpeg({ quality: 90 })
+      .toBuffer();
+
+    const imageUrl = await uploadToCloudinary(resizedBuffer, imageName);
+    req.body.images.push(imageUrl);
   }
-  next()
+
+  next();
 });
 exports.createLaptop = catchAsync(async (req, res) => {
   const laptopData = { ...req.body, supplier: req.user._id };
