@@ -40,7 +40,7 @@ export const SupplierProfile = () => {
               {supplier?.businessName}
             </h1>
             <p className="text-base capitalize">{supplier?.tagline}</p>
-            <button className="btn-filled">Contact Now</button>
+            <a className="btn-filled" href="https://wa.me/+923494939436">Contact Now</a>
           </div>
         </div>
       </section>
