@@ -43,10 +43,6 @@ const laptopSchema = new mongoose.Schema(
       required: [true, "Enter price"],
     },
     images: [String],
-    inStock: {
-      type: Boolean,
-      default: true,
-    },
     usageType: {
       type: String,
       enum: [

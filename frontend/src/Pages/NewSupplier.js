@@ -65,14 +65,10 @@ export const NewSupplier = () => {
           </div>
 
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1  gap-4">
             <div className="input-group">
               <label className="block text-gray-700">Email</label>
               <input type="email" placeholder="example@gmail.com" className="w-full p-3 mt-1 border rounded-lg focus:ring-2 focus:ring-[#003E71] focus:outline-none" {...register('email')} />
-            </div>
-            <div className="input-group">
-              <label className="block text-gray-700">Business Email</label>
-              <input type="email" placeholder="info@example.com" className="w-full p-3 mt-1 border rounded-lg focus:ring-2 focus:ring-[#003E71] focus:outline-none" {...register("businessEmail")}/>
             </div>
           </div>
 

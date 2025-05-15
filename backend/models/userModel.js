@@ -57,11 +57,6 @@ const supplierSchema = new mongoose.Schema(
       required: [true, "Business must have a name"],
       unique: true,
     },
-    businessEmail: {
-      type: String,
-      validate: [validator.isEmail, "Enter a valid email"],
-      unique: true,
-    },
     businessPhone: {
       type: String,
       required: [true, "Enter business phone number"],
